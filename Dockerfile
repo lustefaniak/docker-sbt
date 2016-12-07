@@ -1,4 +1,3 @@
-#
 # SBT image based on Oracle JRE 8
 # Based on https://github.com/1science/docker-sbt
 
@@ -16,5 +15,8 @@ RUN curl -sL "http://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SB
     echo -ne "- with sbt $SBT_VERSION\n" >> /root/.built
 
 RUN mkdir -p src/main/scala && echo "object A" > src/main/scala/A.scala && sbt 'set scalaVersion:="'${SCALA_VERSION}'"' compile && rm -r -f src target project
+
+# Install other goodies
+RUN apk update && apk add git openssh
 
 WORKDIR /app
