@@ -6,7 +6,7 @@ FROM 1science/java:oracle-jre-8
 MAINTAINER Lukas Stefaniak <lustefaniak@gmail.com>
 
 ENV SBT_VERSION 0.13.13
-ENV SCALA_VERSION 2.12.0
+ENV SCALA_VERSION 2.12.1
 ENV SBT_HOME /usr/local/sbt
 ENV PATH ${PATH}:${SBT_HOME}/bin
 ENV JAVA_OPTS -Xmx2g
