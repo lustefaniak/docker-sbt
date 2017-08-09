@@ -5,7 +5,7 @@
 FROM 1science/java:oracle-jre-8
 MAINTAINER Lukas Stefaniak <lustefaniak@gmail.com>
 
-ENV SBT_VERSION 0.13.15
+ENV SBT_VERSION 0.13.16
 ENV SCALA_VERSION 2.12.3
 ENV SCALA_2_10_VERSION 2.10.6
 ENV SBT_HOME /usr/local/sbt
