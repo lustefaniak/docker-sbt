@@ -13,7 +13,7 @@ ENV PATH ${PATH}:${SBT_HOME}/bin
 ENV JAVA_OPTS -Xmx2g
 
 # Install sbt
-RUN curl -sL "https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz" | gunzip | tar -x -C /tmp/ && rm -r /usr/local && mv /tmp/sbt /usr/local && mkdir $HOME/.sbt && mv /usr/local/lib/local-preloaded $HOME/.sbt/preloaded
+RUN curl -sL "https://cocl.us/sbt-$SBT_VERSION.tgz" | gunzip | tar -x -C /tmp/ && rm -r /usr/local && mv /tmp/sbt /usr/local && mkdir $HOME/.sbt && mv /usr/local/lib/local-preloaded $HOME/.sbt/preloaded
 
 RUN mkdir -p src/main/scala && echo "object A" > src/main/scala/A.scala && sbt 'set scalaVersion:="'${SCALA_2_10_VERSION}'"' compile && sbt 'set scalaVersion:="'${SCALA_VERSION}'"' compile && rm -r -f src target project
 
