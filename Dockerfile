@@ -11,7 +11,7 @@ ENV PATH ${PATH}:${SBT_HOME}/bin
 ENV JAVA_OPTS -Xmx2g
 
 # Install curl
-RUN apk add --update curl bash bc && rm -rf /var/cache/apk/*
+RUN apk add --update curl bash bc git && rm -rf /var/cache/apk/*
 
 # Install sbt
 RUN curl -sL "https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz" | gunzip | tar -x -C /tmp/ && rm -r /usr/local && mv /tmp/sbt /usr/local && mkdir $HOME/.sbt && mv /usr/local/lib/local-preloaded $HOME/.sbt/preloaded
