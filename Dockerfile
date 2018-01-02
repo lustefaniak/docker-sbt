@@ -3,7 +3,7 @@
 FROM java:8-jre-alpine
 MAINTAINER Lukas Stefaniak <lustefaniak@gmail.com>
 
-ENV SBT_VERSION 1.0.3
+ENV SBT_VERSION 1.0.4
 ENV SCALA_VERSION 2.12.4
 ENV SBT_HOME /usr/local/sbt
 ENV PATH ${PATH}:${SBT_HOME}/bin
