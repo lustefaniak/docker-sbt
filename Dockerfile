@@ -1,6 +1,6 @@
 # SBT image based on JRE 8
 
-FROM java:8-jre-alpine
+FROM lustefaniak/docker-graalvm:alpine-1.0.0-rc11.0
 MAINTAINER Lukas Stefaniak <lustefaniak@gmail.com>
 
 ENV SBT_VERSION 1.2.8
