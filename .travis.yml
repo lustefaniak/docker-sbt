@@ -1,4 +1,4 @@
-
+language: minimal
 env:
   - BASE=graalvm
   - SBT_VERSION=1.2.8
