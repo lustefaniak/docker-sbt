@@ -1,9 +1,7 @@
 language: minimal
 env:
-  - BASE=graalvm
-  - SBT_VERSION=1.2.8
-  - SCALA_VERSION=2.12.7
-  - SCALA_VERSION=2.12.8
+  - BASE=graalvm SBT_VERSION=1.2.8 SCALA_VERSION=2.12.7
+  - BASE=graalvm SBT_VERSION=1.2.8 SCALA_VERSION=2.12.8
 
 services:
   - docker
