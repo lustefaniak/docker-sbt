@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-1.0.0-rc14.0
+ARG BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.0.0
 FROM ${BASE_IMAGE}
 
 ARG SBT_VERSION=1.2.8
