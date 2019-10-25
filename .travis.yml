@@ -3,10 +3,8 @@ sudo: false
 
 env:
 
-  - NAME=graalvm BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0.1 SBT_LAUNCHER_VERSION=1.3.2 SBT_VERSION=1.3.3 SCALA_VERSION=2.12.10
-  - NAME=graalvm BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0.1 SBT_LAUNCHER_VERSION=1.3.2 SBT_VERSION=1.3.3 SCALA_VERSION=2.13.1
-  - NAME=graalvm BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0.1 SBT_VERSION=1.3.2 SCALA_VERSION=2.12.10
-  - NAME=graalvm BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0.1 SBT_VERSION=1.3.2 SCALA_VERSION=2.13.1
+  - NAME=graalvm BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0.1 SBT_VERSION=1.3.3 SCALA_VERSION=2.12.10
+  - NAME=graalvm BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0.1 SBT_VERSION=1.3.3 SCALA_VERSION=2.13.1
   - NAME=graalvm BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0.1 SBT_VERSION=1.2.8 SCALA_VERSION=2.12.10
   - NAME=graalvm BASE_IMAGE=lustefaniak/docker-graalvm:alpine-19.2.0.1 SBT_VERSION=1.2.8 SCALA_VERSION=2.13.1  
 
