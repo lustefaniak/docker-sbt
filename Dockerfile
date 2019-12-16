@@ -10,7 +10,7 @@ ARG SBT_HOME=/usr/local/sbt
 ENV SBT_HOME ${SBT_HOME}
 ENV PATH ${PATH}:${SBT_HOME}/bin
 
-RUN apk add --no-cache curl bash bc git openssh
+RUN apk add --no-cache curl bash bc git openssh jq
 
 RUN curl -sL "https://github.com/sbt/sbt/releases/download/v$SBT_LAUNCHER_VERSION/sbt-$SBT_LAUNCHER_VERSION.tgz" | gunzip | tar -x -C /tmp/ && rm -r /usr/local && mv /tmp/sbt /usr/local && mkdir $HOME/.sbt && mv /usr/local/lib/local-preloaded $HOME/.sbt/preloaded
 
