@@ -11,7 +11,7 @@ ARG SBT_HOME=/usr/local/sbt
 ENV SBT_HOME ${SBT_HOME}
 ENV PATH ${PATH}:${SBT_HOME}/bin
 
-RUN apk add --no-cache curl bash bc git openssh jq
+RUN apk add --no-cache curl bash bc git openssh-client jq
 
 RUN echo "Downloading ${SBT_LAUNCHER_URL}" && curl -sL ${SBT_LAUNCHER_URL} | gunzip | tar -x -C /tmp/ && rm -r /usr/local && mv /tmp/sbt /usr/local && mkdir $HOME/.sbt && mv /usr/local/lib/local-preloaded $HOME/.sbt/preloaded
 
