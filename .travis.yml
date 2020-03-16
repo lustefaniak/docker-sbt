@@ -2,14 +2,14 @@ language: minimal
 sudo: false
 
 env:
-  - NAME=graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-20.0.0 SBT_VERSION=1.3.8 SCALA_VERSION=2.12.10
+  - NAME=graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-20.0.0 SBT_VERSION=1.3.8 SCALA_VERSION=2.12.11
   - NAME=graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-20.0.0 SBT_VERSION=1.3.8 SCALA_VERSION=2.13.1
-  - NAME=graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-20.0.0 SBT_VERSION=1.3.8 SCALA_VERSION=2.12.10
+  - NAME=graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-20.0.0 SBT_VERSION=1.3.8 SCALA_VERSION=2.12.11
   - NAME=graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-20.0.0 SBT_VERSION=1.3.8 SCALA_VERSION=2.13.1
   
-  - NAME=adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jdk8u232-b09-alpine-slim SBT_VERSION=1.3.8 SCALA_VERSION=2.12.10
+  - NAME=adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jdk8u232-b09-alpine-slim SBT_VERSION=1.3.8 SCALA_VERSION=2.12.11
   - NAME=adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jdk8u232-b09-alpine-slim SBT_VERSION=1.3.8 SCALA_VERSION=2.13.1
-  - NAME=adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jdk-11.0.5_10-alpine-slim SBT_VERSION=1.3.8 SCALA_VERSION=2.12.10
+  - NAME=adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jdk-11.0.5_10-alpine-slim SBT_VERSION=1.3.8 SCALA_VERSION=2.12.11
   - NAME=adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jdk-11.0.5_10-alpine-slim SBT_VERSION=1.3.8 SCALA_VERSION=2.13.1
 
 services:
