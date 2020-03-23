@@ -20,8 +20,10 @@ if [[ -z "$SCALA_VERSION" ]]; then
     exit 1
 fi
 
-FULL_VERSION=$(git describe --tags)
-VERSION=${FULL_VERSION//v}
+if [[ -z "$VERSION" ]]; then
+    FULL_VERSION=$(git describe --tags)
+    VERSION=${FULL_VERSION//v}
+fi
 
 echo "Building using NAME=$NAME BASE_IMAGE=$BASE_IMAGE SBT_VERSION=$SBT_VERSION SBT_LAUNCHER_VERSION=$SBT_LAUNCHER_VERSION SCALA_VERSION=$SCALA_VERSION VERSION=$VERSION"
 
