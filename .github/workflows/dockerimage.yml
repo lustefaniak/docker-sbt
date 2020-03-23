@@ -12,6 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         docker:
          - "NAME=graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-20.0.0"
@@ -28,9 +29,9 @@ jobs:
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u lustefaniak --password-stdin
     - name: Push from master
       run: |
-        ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./publish.sh
+        ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./push.sh
         if [ "${{ github.ref }}" = "refs/heads/master" ]; then
-          ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./publish.sh
+          ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./push.sh
         else
           echo "Not master branch, skipping..."
         fi
