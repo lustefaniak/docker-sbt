@@ -1,6 +1,12 @@
 name: Docker Image CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+    - master
+    tags:
+    - v*
+  pull_request:
 
 jobs:
   build:
@@ -17,18 +23,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} ./build.sh
-    - name: Test it starts
-      run: docker run --rm lustefaniak/graalvm:${{ matrix.java }}-${{ matrix.graalvm }}-${{ github.sha }} sbt-version
+      run: ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./build.sh
     - name: Login to Docker Hub
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u lustefaniak --password-stdin
-#    - name: Push from master
-#      run: |
-#        if [ "${{ github.ref }}" = "refs/heads/master" ]; then
-#          docker tag lustefaniak/graalvm:${{ matrix.java }}-${{ matrix.graalvm }}-${{ github.sha }} lustefaniak/graalvm:${{ matrix.java }}-${{ matrix.graalvm }}
-#          docker tag lustefaniak/graalvm:${{ matrix.java }}-${{ matrix.graalvm }}-${{ github.sha }} lustefaniak/graalvm:${{ matrix.java }}
-#          docker push lustefaniak/graalvm:${{ matrix.java }}-${{ matrix.graalvm }}
-#          docker push lustefaniak/graalvm:${{ matrix.java }}
-#        else
-#          echo "Not master branch, skipping..."
-#        fi
+    - name: Push from master
+      run: |
+        ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./publish.sh
+        if [ "${{ github.ref }}" = "refs/heads/master" ]; then
+          ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./publish.sh
+        else
+          echo "Not master branch, skipping..."
+        fi
