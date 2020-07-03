@@ -13,7 +13,7 @@ ENV PATH ${PATH}:${SBT_HOME}/bin
 
 RUN apk add --no-cache curl bash bc git openssh-client jq
 
-RUN echo "Downloading ${SBT_LAUNCHER_URL}" && curl -sL ${SBT_LAUNCHER_URL} | gunzip | tar -x -C /tmp/ && rm -r /usr/local && mv /tmp/sbt /usr/local && rm -r /usr/local/lib/local-preloaded
+RUN echo "Downloading ${SBT_LAUNCHER_URL}" && curl -sL ${SBT_LAUNCHER_URL} | gunzip | tar -x -C /tmp/ && rm -r /usr/local && mv /tmp/sbt /usr/local && rm -rf /usr/local/lib/local-preloaded
 
 RUN mkdir -p src/main/scala project && echo sbt.version=${SBT_VERSION} > project/build.properties && echo "object A" > src/main/scala/A.scala && echo "object P" > project/P.scala && sbt 'set scalaVersion:="'${SCALA_VERSION}'"' ';compile;scalaVersion;sbtVersion' && rm -r -f src target project
 
