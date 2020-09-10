@@ -19,8 +19,8 @@ jobs:
          - "NAME=graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-20.2.0-1af49265af5e0a15b55ae7a78fc3640c7e8e5493"
          - "NAME=adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jdk8u232-b09-alpine-slim"
          - "NAME=adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jdk-11.0.5_10-alpine-slim"
-        sbt: [1.3.13]
-        scala: [2.13.3, 2.13.2, 2.12.12, 2.12.11]
+        sbt: [1.3.13, 1.4.0-RC1]
+        scala: [2.13.3, 2.12.12]
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
