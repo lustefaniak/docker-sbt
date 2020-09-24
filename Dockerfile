@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=lustefaniak/graalvm:11-19.3.0.2
+ARG BASE_IMAGE=lustefaniak/graalvm:11-20.2.0-1af49265af5e0a15b55ae7a78fc3640c7e8e5493
 FROM ${BASE_IMAGE}
 
 ARG SBT_VERSION=1.3.12
