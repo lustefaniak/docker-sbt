@@ -15,13 +15,13 @@ ENV SCALA_VERSION=${SCALA_VERSION}
 ENV SBT_VERSION ${SBT_VERSION}
 ENV PATH ${PATH}:/usr/local/sbt
 
-COPY --from=build /usr/local /usr
+COPY --from=build /usr/local /usr/local
 
 ARG PLATFORM_DEPS="echo No platform dependencies"
 RUN sh -c "${PLATFORM_DEPS}"
 
 RUN mkdir -p /tmp/sbt-precompile/src/main/scala /tmp/sbt-precompile/project && cd /tmp/sbt-precompile && echo sbt.version=${SBT_VERSION} > project/build.properties && echo "object A" > src/main/scala/A.scala && echo "object P" > project/P.scala && SBT_OPTS="-Xmx2G -Duser.timezone=GMT" sbt 'set scalaVersion:="'${SCALA_VERSION}'"' ';compile;scalaVersion;sbtVersion' && cd / && rm -r -f /tmp/sbt-precompile
 
-WORKDIR /app
-
 ENTRYPOINT ["/usr/local/bin/sbt"]
+
+WORKDIR /app
