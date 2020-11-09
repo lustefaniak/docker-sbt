@@ -26,8 +26,6 @@ jobs:
         run: |
           echo docker build . --build-arg BASE_IMAGE="${{ matrix.base }}"  --build-arg SBT_VERSION="${{ matrix.sbt }}" --build-arg SCALA_VERSION="${{ matrix.scala }}" -t "lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}"
           docker build . --build-arg BASE_IMAGE="${{ matrix.base }}"  --build-arg SBT_VERSION="${{ matrix.sbt }}" --build-arg SCALA_VERSION="${{ matrix.scala }}"  --build-arg PLATFORM_DEPS="${{ matrix.platform_deps }}" -t "lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}"
-      - name: Test it starts
-        run: docker run --rm lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u lustefaniak --password-stdin
       - name: Push snapshot version
