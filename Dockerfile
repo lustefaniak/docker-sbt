@@ -4,19 +4,15 @@ FROM alpine:3.12.1 AS build
 ARG SBT_VERSION=1.4.2
 ARG SBT_LAUNCHER_VERSION=${SBT_VERSION}
 ARG SBT_LAUNCHER_URL="https://github.com/sbt/sbt/releases/download/v$SBT_LAUNCHER_VERSION/sbt-$SBT_LAUNCHER_VERSION.tgz"
-ARG SCALA_VERSION=2.13.3
 
 RUN apk add --no-cache curl
 
 RUN echo "Downloading launcher ${SBT_LAUNCHER_VERSION} from ${SBT_LAUNCHER_URL}" && curl -sL ${SBT_LAUNCHER_URL} | gunzip | tar -x -C /tmp/ && rm -r /usr/local && mv /tmp/sbt /usr/local && rm -rf /usr/local/lib/local-preloaded
 
-RUN ls -al /usr/local/
-RUN ls -al /usr/local/bin
-RUN ls -al /usr/local/conf
-
 FROM ${BASE_IMAGE}
-ENV SBT_VERSION ${SBT_VERSION}
+ARG SCALA_VERSION=2.13.3
 ENV SCALA_VERSION=${SCALA_VERSION}
+ENV SBT_VERSION ${SBT_VERSION}
 ENV PATH ${PATH}:/usr/local/sbt
 
 COPY --from=build /usr/local /usr
