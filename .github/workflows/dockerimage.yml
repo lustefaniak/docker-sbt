@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Build the Docker image
         run: |
-          echo docker build . --build-arg BASE_IMAGE="${{ matrix.base }}"  --build-arg SBT_VERSION="${{ matrix.sbt }}" --build-arg SCALA_VERSION="${{ matrix.scala }}" -t "lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}"
+          echo docker build . --build-arg BASE_IMAGE="${{ matrix.base }}"  --build-arg SBT_VERSION="${{ matrix.sbt }}" --build-arg SCALA_VERSION="${{ matrix.scala }}"  --build-arg PLATFORM_DEPS="${{ matrix.platform_deps }}" -t "lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}"
           docker build . --build-arg BASE_IMAGE="${{ matrix.base }}"  --build-arg SBT_VERSION="${{ matrix.sbt }}" --build-arg SCALA_VERSION="${{ matrix.scala }}"  --build-arg PLATFORM_DEPS="${{ matrix.platform_deps }}" -t "lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}"
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u lustefaniak --password-stdin
