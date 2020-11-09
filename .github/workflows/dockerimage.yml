@@ -1,12 +1,6 @@
 name: Docker Image CI
 
-on:
-  push:
-    branches:
-      - master
-    tags:
-      - v*
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   build:
@@ -18,7 +12,7 @@ jobs:
         scala: [2.13.3]
         include:
           - name: graalvm11
-            base: lustefaniak/graalvm:11-20.2.0-da3a89f4b20c1098726188961b3ea20aa28191aa
+            base: lustefaniak/graalvm:11-20.2.0-d09b66f38a61439502b9d82359565e079eb5bdeb
           - name: adoptopenjdk11
             base: adoptopenjdk/openjdk11:jdk-11.0.9_11-alpine-slim
           - name: adoptopenjdk11-debian-slim
