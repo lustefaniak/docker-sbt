@@ -14,23 +14,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        docker:
-          - "NAME=graalvm8 BASE_IMAGE=lustefaniak/graalvm:8-20.2.0-da3a89f4b20c1098726188961b3ea20aa28191aa"
-          - "NAME=graalvm11 BASE_IMAGE=lustefaniak/graalvm:11-20.2.0-da3a89f4b20c1098726188961b3ea20aa28191aa"
-          - "NAME=adoptopenjdk8 BASE_IMAGE=adoptopenjdk/openjdk8:jdk8u232-b09-alpine-slim"
-          - "NAME=adoptopenjdk11 BASE_IMAGE=adoptopenjdk/openjdk11:jdk-11.0.5_10-alpine-slim"
         sbt: [1.4.2]
-        scala: [2.13.3, 2.12.12]
+        scala: [2.13.3]
+        include:
+          - name: graalvm11
+            base: lustefaniak/graalvm:11-20.2.0-da3a89f4b20c1098726188961b3ea20aa28191aa
+          - name: adoptopenjdk11
+            base: adoptopenjdk/openjdk11:jdk-11.0.9_11-alpine-slim
+          - name: adoptopenjdk11-debian-slim
+            base: adoptopenjdk/openjdk11:jdk-11.0.9_11-debian-slim
+
     steps:
       - uses: actions/checkout@v1
       - name: Build the Docker image
-        run: ${{ matrix.docker }} SBT_LAUNCHER_VERSION=1.4.2 SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./build.sh
+        run: docker build . --build-arg BASE_IMAGE="${{ matrix.base }}"  --build-arg SBT_VERSION="${{ matrix.sbt }}" --build-arg SCALA_VERSION="${{ matrix.scala }}" -t "lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}"
+      - name: Test it starts
+        run: docker run --rm lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u lustefaniak --password-stdin
+      - name: Push snapshot version
+        run: docker push lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}
       - name: Push from master
         run: |
           if [ "${{ github.ref }}" = "refs/heads/master" ]; then
-            ${{ matrix.docker }} SBT_VERSION=${{ matrix.sbt }} SCALA_VERSION=${{ matrix.scala }} VERSION=${{ github.sha }} ./push.sh
+            docker tag lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }} lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}
+            docker push lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}
           else
             echo "Not master branch, skipping..."
           fi
