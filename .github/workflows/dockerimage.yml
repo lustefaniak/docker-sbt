@@ -8,15 +8,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sbt: [1.4.2]
-        scala: [2.13.3]
         include:
           - name: graalvm11
             base: lustefaniak/graalvm:11-20.2.0-d09b66f38a61439502b9d82359565e079eb5bdeb
+            sbt: 1.4.2
+            scala: 2.13.3
           - name: adoptopenjdk11
             base: adoptopenjdk/openjdk11:jdk-11.0.9_11-alpine-slim
+            sbt: 1.4.2
+            scala: 2.13.3
           - name: adoptopenjdk11-debian-slim
             base: adoptopenjdk/openjdk11:jdk-11.0.9_11-debian-slim
+            sbt: 1.4.2
+            scala: 2.13.3
 
     steps:
       - uses: actions/checkout@v1
@@ -25,7 +29,7 @@ jobs:
           echo docker build . --build-arg BASE_IMAGE="${{ matrix.base }}"  --build-arg SBT_VERSION="${{ matrix.sbt }}" --build-arg SCALA_VERSION="${{ matrix.scala }}" -t "lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}"
           docker build . --build-arg BASE_IMAGE="${{ matrix.base }}"  --build-arg SBT_VERSION="${{ matrix.sbt }}" --build-arg SCALA_VERSION="${{ matrix.scala }}" -t "lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}"
       - name: Test it starts
-        run: docker run --rm lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }}
+        run: docker run --rm lustefaniak/sbt:${{ matrix.name }}_${{ matrix.sbt }}_${{ matrix.scala }}-${{ github.sha }} sbt
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u lustefaniak --password-stdin
       - name: Push snapshot version
