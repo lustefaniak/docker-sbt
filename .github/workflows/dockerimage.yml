@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         name: [graalvm11, adoptopenjdk11, spss]
-        sbt: [1.4.2]
+        sbt: [1.4.3]
         scala: [2.13.2, 2.13.3]
         include:
           - name: graalvm11
