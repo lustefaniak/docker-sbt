@@ -13,7 +13,7 @@ jobs:
       matrix:
         name: [graalvm11, adoptopenjdk11, spss]
         sbt: [1.4.7, 1.5.0-M1]
-        scala: [2.13.3, 2.13.4]
+        scala: [2.13.4]
         include:
           - name: graalvm11
             base: lustefaniak/graalvm:11-20.3.0
