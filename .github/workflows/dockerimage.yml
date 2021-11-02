@@ -17,7 +17,7 @@ jobs:
         include:
           - name: graalvm11
             base: lustefaniak/graalvm:11-21.3.0
-          - name: graalvm16
+          - name: graalvm17
             base: lustefaniak/graalvm:17-21.3.0
           - name: spss
             base: lustefaniak/graalvm:11-21.3.0
