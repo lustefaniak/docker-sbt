@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [graalvm11, graalvm17, spss11, spss17]
+        name: [graalvm11, graalvm17, spss11, spss17, scalajs11, scalajs17]
         sbt: [1.5.5]
         scala: [2.13.7, 3.0.0]
         include:
@@ -25,6 +25,12 @@ jobs:
           - name: spss17
             base: lustefaniak/graalvm:17-21.3.0
             platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm jq python3-pip python3 python3-numpy python3-setuptools python3-wheel && rm -rf /var/lib/apt/lists/* && pip3 install savReaderWriter"
+          - name: scalajs11
+            base: lustefaniak/graalvm:11-21.3.0
+            platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm jq"
+          - name: scalajs17
+            base: lustefaniak/graalvm:17-21.3.0
+            platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm jq"
 
     steps:
       - uses: actions/checkout@v1
