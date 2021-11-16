@@ -27,10 +27,10 @@ jobs:
             platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm jq python3-pip python3 python3-numpy python3-setuptools python3-wheel && rm -rf /var/lib/apt/lists/* && pip3 install savReaderWriter"
           - name: scalajs11
             base: lustefaniak/graalvm:11-21.3.0
-            platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm jq"
+            platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm jq yarn"
           - name: scalajs17
             base: lustefaniak/graalvm:17-21.3.0
-            platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm jq"
+            platform_deps: "apt-get update && apt-get install -y --no-install-recommends nodejs npm jq yarn"
 
     steps:
       - uses: actions/checkout@v1
